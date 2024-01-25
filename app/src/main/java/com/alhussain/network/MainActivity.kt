@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import com.alhussain.network.ui.theme.NetworkTheme
 import com.alhussain.retrofit.datasource.AxiomNetworkDataSource
+import com.alhussain.retrofit.model.ResultWrapper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -40,10 +41,23 @@ class MainActivity : ComponentActivity() {
 
 
         lifecycleScope.launch {
+
             network.getCustomerInfoByIMEI("359457090377465")
 
-        }
+            when (val response = network.syncDevice("19962024")) {
+                is ResultWrapper.Success -> {
 
+                }
+
+                is ResultWrapper.GenericError -> {
+                    println("Error: " + response.error?.error)
+                }
+
+                else -> {
+                }
+            }
+
+        }
 
 
     }

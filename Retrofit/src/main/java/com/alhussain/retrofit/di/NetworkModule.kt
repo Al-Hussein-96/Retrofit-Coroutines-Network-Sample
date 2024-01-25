@@ -1,6 +1,8 @@
 package com.alhussain.retrofit.di
 
 import com.alhussain.retrofit.BuildConfig
+import com.alhussain.retrofit.fake.FakeStore
+import com.alhussain.retrofit.interceptors.BasicAuthenticator
 import com.alhussain.retrofit.interceptors.CustomHeaderInterceptor
 import dagger.Module
 import dagger.Provides
@@ -24,13 +26,15 @@ internal object NetworkModule {
 
     @Provides
     @Singleton
-    fun okHttpCallFactory(): Call.Factory = OkHttpClient.Builder().addInterceptor(
-        HttpLoggingInterceptor().apply {
-            if (BuildConfig.DEBUG) {
-                setLevel(HttpLoggingInterceptor.Level.BODY)
-            }
-        },
-    ).addInterceptor(CustomHeaderInterceptor()).build()
+    fun okHttpCallFactory(fakeStore: FakeStore): Call.Factory =
+        OkHttpClient.Builder().addInterceptor(
+            HttpLoggingInterceptor().apply {
+                if (BuildConfig.DEBUG) {
+                    setLevel(HttpLoggingInterceptor.Level.BODY)
+                }
+            },
+        ).addInterceptor(CustomHeaderInterceptor(fakeStore))
+            .authenticator(BasicAuthenticator(fakeStore)).build()
 
 
 }

@@ -1,11 +1,12 @@
 package com.alhussain.retrofit.model
 
 import kotlinx.serialization.Serializable
-import retrofit2.Response
 
 
 @Serializable
-data class NetworkResponse<T>(
-    val data: T? = null,
+data class ServerError(
+    val desc: String? = null,
+    val error: String? = null,
+    val errno: Int? = null,
     val status: String
 )

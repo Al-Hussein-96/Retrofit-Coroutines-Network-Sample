@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.fir.declarations.builder.buildField
-
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.androidLibrary)
@@ -16,8 +14,6 @@ android {
     compileSdk = 34
 
 
-
-
     buildFeatures {
         buildConfig = true
     }
@@ -25,7 +21,7 @@ android {
     kotlin { jvmToolchain(11) }
 }
 
-secrets{
+secrets {
     defaultPropertiesFileName = "secrets.defaults.properties"
 
 }
@@ -33,8 +29,8 @@ secrets{
 dependencies {
 
 
-    implementation (libs.hilt.android)
-    ksp (libs.hilt.compiler)
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
 
     implementation(libs.kotlinx.serialization.json)
 
