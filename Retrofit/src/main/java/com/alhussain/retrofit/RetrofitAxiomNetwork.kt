@@ -4,6 +4,7 @@ import com.alhussain.retrofit.apis.RetrofitAxiomNetworkApi
 import com.alhussain.retrofit.datasource.AxiomNetworkDataSource
 import com.alhussain.retrofit.di.OtherOkHttpClient
 import com.alhussain.retrofit.interceptors.safeApiCall
+import com.alhussain.retrofit.model.ConfirmOrderRequest
 import com.alhussain.retrofit.model.NetworkAppUpdate
 import com.alhussain.retrofit.model.NetworkCatalogs
 import com.alhussain.retrofit.model.NetworkCustomer
@@ -83,6 +84,12 @@ internal class RetrofitAxiomNetwork @Inject constructor(
     override suspend fun fulfilledOrder(reqId: String): ResultWrapper<NetworkFulfilledOrder> {
         return safeApiCall(dispatcher = Dispatchers.IO) {
             networkApi.fulfilledOrder(reqId = reqId)
+        }
+    }
+
+    override suspend fun confirmOrder(request: ConfirmOrderRequest): ResultWrapper<NetworkResponse<Unit>> {
+        return safeApiCall(dispatcher = Dispatchers.IO) {
+            networkApi.confirmOrder(request = request)
         }
     }
 

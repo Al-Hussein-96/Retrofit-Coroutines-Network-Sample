@@ -1,5 +1,6 @@
 package com.alhussain.retrofit.datasource
 
+import com.alhussain.retrofit.model.ConfirmOrderRequest
 import com.alhussain.retrofit.model.NetworkAppUpdate
 import com.alhussain.retrofit.model.NetworkCatalogs
 import com.alhussain.retrofit.model.NetworkCustomer
@@ -22,4 +23,5 @@ interface AxiomNetworkDataSource {
     suspend fun getAppUpdate(request: NetworkAppUpdate.NetworkAppUpdateRequest): ResultWrapper<NetworkAppUpdate>
     suspend fun order(request: NetworkOrder.NetworkOrderRequest): ResultWrapper<NetworkOrder>
     suspend fun fulfilledOrder(reqId: String): ResultWrapper<NetworkFulfilledOrder>
+    suspend fun confirmOrder(request: ConfirmOrderRequest): ResultWrapper<NetworkResponse<Unit>>
 }

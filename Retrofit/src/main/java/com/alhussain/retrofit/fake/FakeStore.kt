@@ -2,6 +2,7 @@ package com.alhussain.retrofit.fake
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.alhussain.retrofit.model.ConfirmOrderRequest
 import com.alhussain.retrofit.model.NetworkAppUpdate
 import com.alhussain.retrofit.model.NetworkOrder
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -43,6 +44,14 @@ class FakeStore @Inject constructor(@ApplicationContext context: Context) {
             type = "PIN",
             origin = "POS",
             items = listOf(NetworkOrder.NetworkOrderRequest.ItemRequest(productId = 1, qty = 1))
+        )
+
+        fun getConfirmOrderRequest(): ConfirmOrderRequest = ConfirmOrderRequest(
+            reqId = "POS-PIN-525251-CMPSIR31AK07E5BODQ20",
+            cashierId = 1482693820,
+            type = "PIN",
+            pinSerial = "2653140380",
+            status = "printed"
         )
     }
 }

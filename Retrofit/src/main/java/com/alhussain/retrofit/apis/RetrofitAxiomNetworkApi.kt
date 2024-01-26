@@ -1,5 +1,6 @@
 package com.alhussain.retrofit.apis
 
+import com.alhussain.retrofit.model.ConfirmOrderRequest
 import com.alhussain.retrofit.model.NetworkAppUpdate
 import com.alhussain.retrofit.model.NetworkCatalogs
 import com.alhussain.retrofit.model.NetworkCustomer
@@ -50,6 +51,9 @@ internal interface RetrofitAxiomNetworkApi {
 
     @GET(value = "order/pos/{reqId}")
     suspend fun fulfilledOrder(@Path("reqId") reqId: String): NetworkFulfilledOrder
+
+    @POST(value = "order/confirm")
+    suspend fun confirmOrder(@Body request: ConfirmOrderRequest): NetworkResponse<Unit>
 
 
 }
