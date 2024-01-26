@@ -7,5 +7,5 @@ import retrofit2.Response
 @Serializable
 data class NetworkResponse<T>(
     val data: T? = null,
-    val status: String
+    val status: String?
 )

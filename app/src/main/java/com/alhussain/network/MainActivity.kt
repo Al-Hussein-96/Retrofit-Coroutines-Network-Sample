@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import com.alhussain.network.ui.theme.NetworkTheme
+import com.alhussain.retrofit.datasource.AuthDataSource
 import com.alhussain.retrofit.datasource.AxiomNetworkDataSource
 import com.alhussain.retrofit.model.ResultWrapper
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,6 +25,9 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var network: AxiomNetworkDataSource
+
+    @Inject
+    lateinit var auth: AuthDataSource
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -56,6 +60,21 @@ class MainActivity : ComponentActivity() {
                 else -> {
                 }
             }
+
+//            when (val response = auth.login()) {
+//                is ResultWrapper.Success -> {
+//                    println("Success: " + response.value.data?.accessToken)
+//
+//                }
+//
+//                is ResultWrapper.GenericError -> {
+//                    println("Error: " + response.error?.error)
+//                }
+//
+//                else -> {
+//                }
+//            }
+
 
         }
 

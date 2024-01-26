@@ -29,7 +29,6 @@ android {
             useSupportLibrary = true
         }
 
-        multiDexEnabled = true
     }
 
     buildTypes {

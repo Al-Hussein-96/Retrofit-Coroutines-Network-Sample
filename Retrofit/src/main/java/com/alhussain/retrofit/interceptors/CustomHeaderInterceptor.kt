@@ -2,6 +2,7 @@ package com.alhussain.retrofit.interceptors
 
 import com.alhussain.retrofit.BuildConfig
 import com.alhussain.retrofit.fake.FakeStore
+import okhttp3.Credentials
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
@@ -15,11 +16,14 @@ class CustomHeaderInterceptor @Inject constructor(private val fakeStore: FakeSto
         val request = chain.request();
         val newRequest = request.newBuilder().addHeader(
             "X-POSKey", APP_KEY
-        ).addHeader("appver", APP_VERSION)
+        ).addHeader("appver", APP_VERSION).addHeader("Content-Type", "application/json")
 
 
-
-        if (fakeStore.getAuthToken().isNotEmpty()) {
+        if (chain.request().url.toString().contains("login")) {
+            val credential: String =
+                Credentials.basic(fakeStore.getUsername(), fakeStore.getPassword())
+            newRequest.addHeader("Authorization", credential).build()
+        } else if (fakeStore.getAuthToken().isNotEmpty()) {
             newRequest.addHeader("Authorization", "Bearer ${fakeStore.getAuthToken()}")
         }
 
