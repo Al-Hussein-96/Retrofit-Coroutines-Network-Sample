@@ -45,9 +45,9 @@ class MainActivity : ComponentActivity() {
 
         lifecycleScope.launch {
 
-            network.getCustomerInfoByIMEI("359457090377465")
-
-            network.getTemplates()
+//            network.getCustomerInfoByIMEI("359457090377465")
+//
+            network.getServerStatus()
 
 
         }

@@ -13,7 +13,9 @@ class FakeStore @Inject constructor(@ApplicationContext context: Context) {
         context.getSharedPreferences("Axiom", Context.MODE_PRIVATE)
     }
 
-
+    fun setAuthToken(token: String) {
+         mSharedPref.edit().putString(AppConstants.AUTH_TOKEN,token).apply()
+    }
     fun getAuthToken(): String {
         return mSharedPref.getString(AppConstants.AUTH_TOKEN, "").orEmpty()
     }

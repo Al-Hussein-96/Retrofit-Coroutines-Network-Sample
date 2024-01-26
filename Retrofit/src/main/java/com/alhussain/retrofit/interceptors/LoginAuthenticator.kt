@@ -23,7 +23,10 @@ class LoginAuthenticator(
         } else {
             val result = axiomNetwork.login()
 
+
             if (result is ResultWrapper.Success) {
+                fakeStore.setAuthToken(result.value.token.accessToken)
+
                 response.request.newBuilder()
                     .addHeader("Authorization", "Bearer ${result.value.token.accessToken}").build()
             } else {

@@ -1,6 +1,5 @@
 package com.alhussain.retrofit
 
-import com.alhussain.retrofit.apis.AuthNetworkApi
 import com.alhussain.retrofit.apis.RetrofitAxiomNetworkApi
 import com.alhussain.retrofit.datasource.AxiomNetworkDataSource
 import com.alhussain.retrofit.di.OtherOkHttpClient
@@ -8,9 +7,9 @@ import com.alhussain.retrofit.interceptors.safeApiCall
 import com.alhussain.retrofit.model.NetworkCatalogs
 import com.alhussain.retrofit.model.NetworkCustomer
 import com.alhussain.retrofit.model.NetworkResponse
+import com.alhussain.retrofit.model.NetworkServerStatus
 import com.alhussain.retrofit.model.NetworkSyncedDevice
 import com.alhussain.retrofit.model.NetworkTemplates
-import com.alhussain.retrofit.model.NetworkToken
 import com.alhussain.retrofit.model.ResultWrapper
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.coroutines.Dispatchers
@@ -41,9 +40,8 @@ internal class RetrofitAxiomNetwork @Inject constructor(
         .create(RetrofitAxiomNetworkApi::class.java)
 
 
-
     override suspend fun getCustomerInfoByIMEI(imei: String): ResultWrapper<NetworkResponse<NetworkCustomer>> {
-        return safeApiCall(dispatcher = Dispatchers.IO){
+        return safeApiCall(dispatcher = Dispatchers.IO) {
             networkApi.getCustomerInfoByIMEI(imei)
         }
     }
@@ -67,5 +65,10 @@ internal class RetrofitAxiomNetwork @Inject constructor(
         }
     }
 
+    override suspend fun getServerStatus(): ResultWrapper<NetworkServerStatus> {
+        return safeApiCall(dispatcher = Dispatchers.IO) {
+            networkApi.getServerStatus()
+        }
+    }
 
 }

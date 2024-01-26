@@ -3,6 +3,7 @@ package com.alhussain.retrofit.apis
 import com.alhussain.retrofit.model.NetworkCatalogs
 import com.alhussain.retrofit.model.NetworkCustomer
 import com.alhussain.retrofit.model.NetworkResponse
+import com.alhussain.retrofit.model.NetworkServerStatus
 import com.alhussain.retrofit.model.NetworkSyncedDevice
 import com.alhussain.retrofit.model.NetworkTemplates
 import retrofit2.http.GET
@@ -29,6 +30,10 @@ internal interface RetrofitAxiomNetworkApi {
 
     @GET(value = "catalog/template")
     suspend fun getTemplates(): NetworkResponse<NetworkTemplates>
+
+
+    @GET(value = "status")
+    suspend fun getServerStatus(): NetworkServerStatus
 
 
 }

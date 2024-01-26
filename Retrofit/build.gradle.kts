@@ -13,6 +13,9 @@ android {
     namespace = "com.alhussain.retrofit"
     compileSdk = 34
 
+    defaultConfig {
+        minSdk = 24
+    }
 
     buildFeatures {
         buildConfig = true
