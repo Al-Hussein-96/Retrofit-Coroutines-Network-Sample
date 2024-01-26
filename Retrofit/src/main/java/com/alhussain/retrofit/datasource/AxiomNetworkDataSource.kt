@@ -1,7 +1,9 @@
 package com.alhussain.retrofit.datasource
 
+import com.alhussain.retrofit.model.NetworkAppUpdate
 import com.alhussain.retrofit.model.NetworkCatalogs
 import com.alhussain.retrofit.model.NetworkCustomer
+import com.alhussain.retrofit.model.NetworkOrder
 import com.alhussain.retrofit.model.NetworkResponse
 import com.alhussain.retrofit.model.NetworkServerStatus
 import com.alhussain.retrofit.model.NetworkSyncedDevice
@@ -16,4 +18,6 @@ interface AxiomNetworkDataSource {
     suspend fun getCatalogs(customerGroup: Int): ResultWrapper<NetworkCatalogs>
     suspend fun getTemplates(): ResultWrapper<NetworkResponse<NetworkTemplates>>
     suspend fun getServerStatus(): ResultWrapper<NetworkServerStatus>
+    suspend fun getAppUpdate(request: NetworkAppUpdate.NetworkAppUpdateRequest): ResultWrapper<NetworkAppUpdate>
+    suspend fun order(request: NetworkOrder.NetworkOrderRequest): ResultWrapper<NetworkOrder>
 }

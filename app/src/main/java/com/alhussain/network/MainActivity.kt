@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import com.alhussain.network.ui.theme.NetworkTheme
 import com.alhussain.retrofit.datasource.AuthDataSource
 import com.alhussain.retrofit.datasource.AxiomNetworkDataSource
+import com.alhussain.retrofit.fake.FakeStore
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -47,7 +48,11 @@ class MainActivity : ComponentActivity() {
 
 //            network.getCustomerInfoByIMEI("359457090377465")
 //
-            network.getServerStatus()
+
+
+//            network.getAppUpdate(FakeStore.getAppUpdateRequest())
+
+            network.order(FakeStore.getOrderRequest())
 
 
         }
