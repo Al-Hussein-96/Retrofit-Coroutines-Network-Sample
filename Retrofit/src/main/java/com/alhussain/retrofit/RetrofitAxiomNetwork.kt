@@ -5,8 +5,10 @@ import com.alhussain.retrofit.apis.RetrofitAxiomNetworkApi
 import com.alhussain.retrofit.datasource.AxiomNetworkDataSource
 import com.alhussain.retrofit.di.OtherOkHttpClient
 import com.alhussain.retrofit.interceptors.safeApiCall
+import com.alhussain.retrofit.model.NetworkCatalogs
 import com.alhussain.retrofit.model.NetworkCustomer
 import com.alhussain.retrofit.model.NetworkResponse
+import com.alhussain.retrofit.model.NetworkSyncedDevice
 import com.alhussain.retrofit.model.NetworkToken
 import com.alhussain.retrofit.model.ResultWrapper
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -27,15 +29,6 @@ internal class RetrofitAxiomNetwork @Inject constructor(
     @OtherOkHttpClient okhttpCallFactory: Call.Factory,
 ) : AxiomNetworkDataSource {
 
-    private val authApi = Retrofit.Builder()
-        .baseUrl(AXIOM_BASE_URL)
-        .callFactory(okhttpCallFactory)
-        .addConverterFactory(
-            networkJson.asConverterFactory("application/json".toMediaType()),
-        )
-        .build()
-        .create(RetrofitAxiomNetworkApi::class.java)
-
 
     private val networkApi = Retrofit.Builder()
         .baseUrl(AXIOM_BASE_URL)
@@ -47,18 +40,23 @@ internal class RetrofitAxiomNetwork @Inject constructor(
         .create(RetrofitAxiomNetworkApi::class.java)
 
 
-    override suspend fun login(): ResultWrapper<NetworkToken> {
-        return safeApiCall(dispatcher = Dispatchers.IO) {
-            authApi.login()
+
+    override suspend fun getCustomerInfoByIMEI(imei: String): ResultWrapper<NetworkResponse<NetworkCustomer>> {
+        return safeApiCall(dispatcher = Dispatchers.IO){
+            networkApi.getCustomerInfoByIMEI(imei)
         }
     }
 
-    override suspend fun getCustomerInfoByIMEI(imei: String): NetworkResponse<NetworkCustomer> =
-        networkApi.getCustomerInfoByIMEI(imei)
 
-    override suspend fun syncDevice(deviceId: String): ResultWrapper<NetworkResponse<NetworkCustomer>> {
+    override suspend fun syncDevice(deviceId: String): ResultWrapper<NetworkSyncedDevice> {
         return safeApiCall(dispatcher = Dispatchers.IO) {
             networkApi.syncDevice(deviceId)
+        }
+    }
+
+    override suspend fun getCatalogs(customerGroup: Int): ResultWrapper<NetworkCatalogs> {
+        return safeApiCall(dispatcher = Dispatchers.IO) {
+            networkApi.getCatalogs(customerGroup)
         }
     }
 

@@ -14,7 +14,6 @@ import androidx.lifecycle.lifecycleScope
 import com.alhussain.network.ui.theme.NetworkTheme
 import com.alhussain.retrofit.datasource.AuthDataSource
 import com.alhussain.retrofit.datasource.AxiomNetworkDataSource
-import com.alhussain.retrofit.model.ResultWrapper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -48,32 +47,7 @@ class MainActivity : ComponentActivity() {
 
             network.getCustomerInfoByIMEI("359457090377465")
 
-            when (val response = network.syncDevice("19962024")) {
-                is ResultWrapper.Success -> {
-
-                }
-
-                is ResultWrapper.GenericError -> {
-                    println("Error: " + response.error?.error)
-                }
-
-                else -> {
-                }
-            }
-
-//            when (val response = auth.login()) {
-//                is ResultWrapper.Success -> {
-//                    println("Success: " + response.value.data?.accessToken)
-//
-//                }
-//
-//                is ResultWrapper.GenericError -> {
-//                    println("Error: " + response.error?.error)
-//                }
-//
-//                else -> {
-//                }
-//            }
+            network.getCatalogs(1)
 
 
         }
