@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
 
             network.getCustomerInfoByIMEI("359457090377465")
 
-            network.getCatalogs(1)
+            network.getTemplates()
 
 
         }

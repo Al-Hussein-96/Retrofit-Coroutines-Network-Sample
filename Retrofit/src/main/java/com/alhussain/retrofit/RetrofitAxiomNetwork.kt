@@ -9,6 +9,7 @@ import com.alhussain.retrofit.model.NetworkCatalogs
 import com.alhussain.retrofit.model.NetworkCustomer
 import com.alhussain.retrofit.model.NetworkResponse
 import com.alhussain.retrofit.model.NetworkSyncedDevice
+import com.alhussain.retrofit.model.NetworkTemplates
 import com.alhussain.retrofit.model.NetworkToken
 import com.alhussain.retrofit.model.ResultWrapper
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -57,6 +58,12 @@ internal class RetrofitAxiomNetwork @Inject constructor(
     override suspend fun getCatalogs(customerGroup: Int): ResultWrapper<NetworkCatalogs> {
         return safeApiCall(dispatcher = Dispatchers.IO) {
             networkApi.getCatalogs(customerGroup)
+        }
+    }
+
+    override suspend fun getTemplates(): ResultWrapper<NetworkResponse<NetworkTemplates>> {
+        return safeApiCall(dispatcher = Dispatchers.IO) {
+            networkApi.getTemplates()
         }
     }
 
