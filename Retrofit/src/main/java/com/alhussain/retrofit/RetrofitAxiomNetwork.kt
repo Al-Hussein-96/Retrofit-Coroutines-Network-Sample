@@ -7,6 +7,7 @@ import com.alhussain.retrofit.interceptors.safeApiCall
 import com.alhussain.retrofit.model.NetworkAppUpdate
 import com.alhussain.retrofit.model.NetworkCatalogs
 import com.alhussain.retrofit.model.NetworkCustomer
+import com.alhussain.retrofit.model.NetworkFulfilledOrder
 import com.alhussain.retrofit.model.NetworkOrder
 import com.alhussain.retrofit.model.NetworkResponse
 import com.alhussain.retrofit.model.NetworkServerStatus
@@ -76,6 +77,12 @@ internal class RetrofitAxiomNetwork @Inject constructor(
     override suspend fun order(request: NetworkOrder.NetworkOrderRequest): ResultWrapper<NetworkOrder> {
         return safeApiCall(dispatcher = Dispatchers.IO) {
             networkApi.order(request)
+        }
+    }
+
+    override suspend fun fulfilledOrder(reqId: String): ResultWrapper<NetworkFulfilledOrder> {
+        return safeApiCall(dispatcher = Dispatchers.IO) {
+            networkApi.fulfilledOrder(reqId = reqId)
         }
     }
 

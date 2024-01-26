@@ -3,6 +3,7 @@ package com.alhussain.retrofit.apis
 import com.alhussain.retrofit.model.NetworkAppUpdate
 import com.alhussain.retrofit.model.NetworkCatalogs
 import com.alhussain.retrofit.model.NetworkCustomer
+import com.alhussain.retrofit.model.NetworkFulfilledOrder
 import com.alhussain.retrofit.model.NetworkOrder
 import com.alhussain.retrofit.model.NetworkResponse
 import com.alhussain.retrofit.model.NetworkServerStatus
@@ -45,6 +46,10 @@ internal interface RetrofitAxiomNetworkApi {
 
     @POST(value = "order")
     suspend fun order(@Body request: NetworkOrder.NetworkOrderRequest): NetworkOrder
+
+
+    @GET(value = "order/pos/{reqId}")
+    suspend fun fulfilledOrder(@Path("reqId") reqId: String): NetworkFulfilledOrder
 
 
 }

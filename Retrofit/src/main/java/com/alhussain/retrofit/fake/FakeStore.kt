@@ -20,7 +20,7 @@ class FakeStore @Inject constructor(@ApplicationContext context: Context) {
     }
 
     fun getAuthToken(): String {
-        return mSharedPref.getString(AppConstants.AUTH_TOKEN, "").orEmpty()
+        return "123" + mSharedPref.getString(AppConstants.AUTH_TOKEN, "").orEmpty()
     }
 
     fun getUsername(): String = mSharedPref.getString(AppConstants.USERNAME, "525251").orEmpty()

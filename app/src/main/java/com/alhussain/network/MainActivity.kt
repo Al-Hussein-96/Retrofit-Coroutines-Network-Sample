@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
 
 //            network.getAppUpdate(FakeStore.getAppUpdateRequest())
 
-            network.order(FakeStore.getOrderRequest())
+            network.fulfilledOrder("POS-PIN-525251-CMPQHTB1AK07E5BODQ0G")
 
 
         }

@@ -28,7 +28,7 @@ class LoginAuthenticator(
                 fakeStore.setAuthToken(result.value.token.accessToken)
 
                 response.request.newBuilder()
-                    .addHeader("Authorization", "Bearer ${result.value.token.accessToken}").build()
+                    .header("Authorization", "Bearer ${result.value.token.accessToken}").build()
             } else {
                 null
             }
