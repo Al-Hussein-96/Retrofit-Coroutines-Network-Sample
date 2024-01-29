@@ -15,12 +15,8 @@ data class NetworkClaims(
         @SerialName("Pinserial") val pinSerial: String,
         @SerialName("Status") val status: String,
         @SerialName("productdetails") val productDetails: ProductDetails,
-    ){
-
+    ) {
         @Serializable
-        data class ProductDetails(
-            val descEn: String? = null,
-
-        )
+        data class ProductDetails(val descEn: String? = null)
     }
 }
