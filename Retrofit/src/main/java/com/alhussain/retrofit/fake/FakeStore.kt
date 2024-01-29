@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.alhussain.retrofit.model.ConfirmOrderRequest
 import com.alhussain.retrofit.model.DingOrderRequest
+import com.alhussain.retrofit.model.EmposOrderRequest
 import com.alhussain.retrofit.model.FulfilledDingOrderRequest
 import com.alhussain.retrofit.model.INetworkOrderRequest
 import com.alhussain.retrofit.model.NetworkAppUpdate
@@ -85,6 +86,21 @@ class FakeStore @Inject constructor(@ApplicationContext context: Context) {
             accountRequest = DingOrderRequest.AccountRequest(
                 number = "920000000000",
                 benefits = "Mobile"
+            )
+        )
+
+        fun getFulfilledEmposOrderRequet(): EmposOrderRequest = EmposOrderRequest(
+            cashierId = 918246313,
+            customerRef = "359457090377465",
+            deviceId = "785507",
+            type = "DING",
+            origin = "POS",
+            customerId = "19962024",
+            items = listOf(INetworkOrderRequest.ItemRequest(productId = 1, qty = 1, amount = 1.98)),
+            accountRequest = EmposOrderRequest.AccountRequest(
+                msisdn = "971500000000",
+                amount = 25.0,
+                subtype = ""
             )
         )
     }

@@ -2,6 +2,7 @@ package com.alhussain.retrofit.apis
 
 import com.alhussain.retrofit.model.ConfirmOrderRequest
 import com.alhussain.retrofit.model.DingOrderRequest
+import com.alhussain.retrofit.model.EmposOrderRequest
 import com.alhussain.retrofit.model.FulfilledDingOrderRequest
 import com.alhussain.retrofit.model.NetworkAppUpdate
 import com.alhussain.retrofit.model.NetworkCatalogs
@@ -72,6 +73,10 @@ internal interface RetrofitAxiomNetworkApi {
 
     @POST(value = "order/ding/pos/send")
     suspend fun fulfilledDingOrder(@Body request: FulfilledDingOrderRequest): NetworkFulfilledDingOrder
+
+
+    @POST(value = "order/ding/pos/send")
+    suspend fun fulfilledEmposOrder(@Body request: EmposOrderRequest): NetworkFulfilledDingOrder
 
 
 }

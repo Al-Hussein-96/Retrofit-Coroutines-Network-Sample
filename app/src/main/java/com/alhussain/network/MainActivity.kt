@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
 //            network.getAppUpdate(FakeStore.getAppUpdateRequest())
 
 //            network.fulfilledOrder("POS-PIN-525251-CMPQHTB1AK07E5BODQ0G")
-            val result = network.fulfilledDingOrder(FakeStore.getFulfilledDingOrderRequet())
+            val result = network.fulfilledEmposOrder(FakeStore.getFulfilledEmposOrderRequet())
             if (result is ResultWrapper.Success) {
                 println("result: ${result.value.desc}")
             }
