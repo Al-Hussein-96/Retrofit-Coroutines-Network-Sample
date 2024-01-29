@@ -3,6 +3,7 @@ package com.alhussain.retrofit.fake
 import android.content.Context
 import android.content.SharedPreferences
 import com.alhussain.retrofit.model.ClaimRequest
+import com.alhussain.retrofit.model.ClaimsRequest
 import com.alhussain.retrofit.model.ConfirmOrderRequest
 import com.alhussain.retrofit.model.DingOrderRequest
 import com.alhussain.retrofit.model.EmposOrderRequest
@@ -111,6 +112,11 @@ class FakeStore @Inject constructor(@ApplicationContext context: Context) {
             data = "No paper",
             orderRef = 15084,
             source = "POS",
+        )
+
+        fun getClaimsRequest(): ClaimsRequest = ClaimsRequest(
+            fromdate = "2022-09-05 01:00:00 AM",
+            todate = "2022-10-10 11:59:59 PM"
         )
     }
 }

@@ -5,13 +5,15 @@ import com.alhussain.retrofit.datasource.AxiomNetworkDataSource
 import com.alhussain.retrofit.di.OtherOkHttpClient
 import com.alhussain.retrofit.interceptors.safeApiCall
 import com.alhussain.retrofit.model.ClaimRequest
+import com.alhussain.retrofit.model.ClaimsRequest
 import com.alhussain.retrofit.model.ConfirmOrderRequest
 import com.alhussain.retrofit.model.DingOrderRequest
 import com.alhussain.retrofit.model.EmposOrderRequest
 import com.alhussain.retrofit.model.FulfilledDingOrderRequest
 import com.alhussain.retrofit.model.NetworkAppUpdate
 import com.alhussain.retrofit.model.NetworkCatalogs
-import com.alhussain.retrofit.model.NetworkClaim
+import com.alhussain.retrofit.model.NetworkClaimResult
+import com.alhussain.retrofit.model.NetworkClaims
 import com.alhussain.retrofit.model.NetworkCustomer
 import com.alhussain.retrofit.model.NetworkDingResult
 import com.alhussain.retrofit.model.NetworkFulfilledDingOrder
@@ -126,9 +128,15 @@ internal class RetrofitAxiomNetwork @Inject constructor(
         }
     }
 
-    override suspend fun requestClaim(request: ClaimRequest): ResultWrapper<NetworkClaim> {
+    override suspend fun requestClaim(request: ClaimRequest): ResultWrapper<NetworkClaimResult> {
         return safeApiCall(dispatcher = Dispatchers.IO) {
             networkApi.requestClaim(request = request)
+        }
+    }
+
+    override suspend fun getClaims(request: ClaimsRequest): ResultWrapper<NetworkClaims> {
+        return safeApiCall(dispatcher = Dispatchers.IO) {
+            networkApi.getClaims(request = request)
         }
     }
 

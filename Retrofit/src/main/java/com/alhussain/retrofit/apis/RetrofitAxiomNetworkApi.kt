@@ -1,13 +1,15 @@
 package com.alhussain.retrofit.apis
 
 import com.alhussain.retrofit.model.ClaimRequest
+import com.alhussain.retrofit.model.ClaimsRequest
 import com.alhussain.retrofit.model.ConfirmOrderRequest
 import com.alhussain.retrofit.model.DingOrderRequest
 import com.alhussain.retrofit.model.EmposOrderRequest
 import com.alhussain.retrofit.model.FulfilledDingOrderRequest
 import com.alhussain.retrofit.model.NetworkAppUpdate
 import com.alhussain.retrofit.model.NetworkCatalogs
-import com.alhussain.retrofit.model.NetworkClaim
+import com.alhussain.retrofit.model.NetworkClaimResult
+import com.alhussain.retrofit.model.NetworkClaims
 import com.alhussain.retrofit.model.NetworkCustomer
 import com.alhussain.retrofit.model.NetworkDingResult
 import com.alhussain.retrofit.model.NetworkFulfilledDingOrder
@@ -82,7 +84,10 @@ internal interface RetrofitAxiomNetworkApi {
 
 
     @POST(value = "order/claim")
-    suspend fun requestClaim(@Body request: ClaimRequest): NetworkClaim
+    suspend fun requestClaim(@Body request: ClaimRequest): NetworkClaimResult
+
+    @POST(value = "order/claim/list")
+    suspend fun getClaims(@Body request: ClaimsRequest): NetworkClaims
 
 
 }
