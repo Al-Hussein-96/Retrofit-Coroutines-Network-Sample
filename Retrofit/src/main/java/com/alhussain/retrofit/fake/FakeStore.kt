@@ -3,6 +3,9 @@ package com.alhussain.retrofit.fake
 import android.content.Context
 import android.content.SharedPreferences
 import com.alhussain.retrofit.model.ConfirmOrderRequest
+import com.alhussain.retrofit.model.DingOrderRequest
+import com.alhussain.retrofit.model.FulfilledDingOrderRequest
+import com.alhussain.retrofit.model.INetworkOrderRequest
 import com.alhussain.retrofit.model.NetworkAppUpdate
 import com.alhussain.retrofit.model.NetworkOrder
 import com.alhussain.retrofit.model.OrdersRequest
@@ -22,7 +25,7 @@ class FakeStore @Inject constructor(@ApplicationContext context: Context) {
     }
 
     fun getAuthToken(): String {
-        return  mSharedPref.getString(AppConstants.AUTH_TOKEN, "").orEmpty()
+        return mSharedPref.getString(AppConstants.AUTH_TOKEN, "").orEmpty()
     }
 
     fun getUsername(): String = mSharedPref.getString(AppConstants.USERNAME, "19962024").orEmpty()
@@ -44,7 +47,7 @@ class FakeStore @Inject constructor(@ApplicationContext context: Context) {
             customerRef = "ref",
             type = "PIN",
             origin = "POS",
-            items = listOf(NetworkOrder.NetworkOrderRequest.ItemRequest(productId = 1, qty = 1))
+            items = listOf(INetworkOrderRequest.ItemRequest(productId = 1, qty = 1))
         )
 
         fun getConfirmOrderRequest(): ConfirmOrderRequest = ConfirmOrderRequest(
@@ -62,6 +65,27 @@ class FakeStore @Inject constructor(@ApplicationContext context: Context) {
             limit = 20,
             fromdate = "2024-01-21 16:24:00 PM",
             todate = "2024-01-26 16:24:00 PM"
+        )
+
+        fun getDingLookupRequest(): DingOrderRequest = DingOrderRequest(
+            type = "DING",
+            accountRequest = DingOrderRequest.AccountRequest(
+                number = "910000000000"
+            )
+        )
+
+        fun getFulfilledDingOrderRequet(): FulfilledDingOrderRequest = FulfilledDingOrderRequest(
+            cashierId = 918246313,
+            customerRef = "359457090377465",
+            deviceId = "785507",
+            type = "DING",
+            origin = "POS",
+            customerId = "19962024",
+            items = listOf(INetworkOrderRequest.ItemRequest(productId = 1, qty = 1, amount = 1.98)),
+            accountRequest = DingOrderRequest.AccountRequest(
+                number = "920000000000",
+                benefits = "Mobile"
+            )
         )
     }
 }

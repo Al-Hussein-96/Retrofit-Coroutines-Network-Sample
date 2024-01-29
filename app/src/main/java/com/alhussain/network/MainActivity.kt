@@ -54,9 +54,9 @@ class MainActivity : ComponentActivity() {
 //            network.getAppUpdate(FakeStore.getAppUpdateRequest())
 
 //            network.fulfilledOrder("POS-PIN-525251-CMPQHTB1AK07E5BODQ0G")
-            val result = network.getOrders(FakeStore.getOrdersRequest())
+            val result = network.fulfilledDingOrder(FakeStore.getFulfilledDingOrderRequet())
             if (result is ResultWrapper.Success) {
-                println("result: ${result.value.orders.size}")
+                println("result: ${result.value.desc}")
             }
 
 

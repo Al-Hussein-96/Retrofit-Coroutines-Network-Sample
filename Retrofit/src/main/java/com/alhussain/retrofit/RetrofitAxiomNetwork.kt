@@ -5,9 +5,13 @@ import com.alhussain.retrofit.datasource.AxiomNetworkDataSource
 import com.alhussain.retrofit.di.OtherOkHttpClient
 import com.alhussain.retrofit.interceptors.safeApiCall
 import com.alhussain.retrofit.model.ConfirmOrderRequest
+import com.alhussain.retrofit.model.DingOrderRequest
+import com.alhussain.retrofit.model.FulfilledDingOrderRequest
 import com.alhussain.retrofit.model.NetworkAppUpdate
 import com.alhussain.retrofit.model.NetworkCatalogs
 import com.alhussain.retrofit.model.NetworkCustomer
+import com.alhussain.retrofit.model.NetworkDingResult
+import com.alhussain.retrofit.model.NetworkFulfilledDingOrder
 import com.alhussain.retrofit.model.NetworkFulfilledOrder
 import com.alhussain.retrofit.model.NetworkOrder
 import com.alhussain.retrofit.model.NetworkOrders
@@ -98,6 +102,18 @@ internal class RetrofitAxiomNetwork @Inject constructor(
     override suspend fun getOrders(request: OrdersRequest): ResultWrapper<NetworkOrders> {
         return safeApiCall(dispatcher = Dispatchers.IO) {
             networkApi.getOrders(request = request)
+        }
+    }
+
+    override suspend fun dingLookup(request: DingOrderRequest): ResultWrapper<NetworkDingResult> {
+        return safeApiCall(dispatcher = Dispatchers.IO) {
+            networkApi.dingLookup(request = request)
+        }
+    }
+
+    override suspend fun fulfilledDingOrder(request: FulfilledDingOrderRequest): ResultWrapper<NetworkFulfilledDingOrder> {
+        return safeApiCall(dispatcher = Dispatchers.IO) {
+            networkApi.fulfilledDingOrder(request = request)
         }
     }
 

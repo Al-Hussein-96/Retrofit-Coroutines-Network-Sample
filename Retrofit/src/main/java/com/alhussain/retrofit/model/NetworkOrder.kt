@@ -12,18 +12,12 @@ data class NetworkOrder(
 ) {
     @Serializable
     data class NetworkOrderRequest(
-        @SerialName("customerid") val customerId: String,
-        @SerialName("deviceid") val deviceId: String,
-        @SerialName("cashierid") val cashierId: Long,
-        @SerialName("customerref") val customerRef: String,
-        @SerialName("Type") val type: String,
-        @SerialName("Origin") val origin: String,
-        val items: List<ItemRequest>
-    ) {
-        @Serializable
-        data class ItemRequest(
-            @SerialName("productid") val productId: Int,
-            val qty: Int
-        )
-    }
+        override val customerId: String,
+        override val deviceId: String,
+        override val cashierId: Long,
+        override val customerRef: String,
+        override val type: String,
+        override val origin: String,
+        override val items: List<INetworkOrderRequest.ItemRequest>
+    ) : INetworkOrderRequest
 }
