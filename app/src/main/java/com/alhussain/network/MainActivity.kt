@@ -15,6 +15,7 @@ import com.alhussain.network.ui.theme.NetworkTheme
 import com.alhussain.retrofit.datasource.AuthDataSource
 import com.alhussain.retrofit.datasource.AxiomNetworkDataSource
 import com.alhussain.retrofit.fake.FakeStore
+import com.alhussain.retrofit.model.ResultWrapper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -53,7 +54,10 @@ class MainActivity : ComponentActivity() {
 //            network.getAppUpdate(FakeStore.getAppUpdateRequest())
 
 //            network.fulfilledOrder("POS-PIN-525251-CMPQHTB1AK07E5BODQ0G")
-            network.confirmOrder(FakeStore.getConfirmOrderRequest())
+            val result = network.getOrders(FakeStore.getOrdersRequest())
+            if (result is ResultWrapper.Success) {
+                println("result: ${result.value.orders.size}")
+            }
 
 
         }

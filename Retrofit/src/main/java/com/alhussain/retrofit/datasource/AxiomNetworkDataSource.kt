@@ -6,10 +6,12 @@ import com.alhussain.retrofit.model.NetworkCatalogs
 import com.alhussain.retrofit.model.NetworkCustomer
 import com.alhussain.retrofit.model.NetworkFulfilledOrder
 import com.alhussain.retrofit.model.NetworkOrder
+import com.alhussain.retrofit.model.NetworkOrders
 import com.alhussain.retrofit.model.NetworkResponse
 import com.alhussain.retrofit.model.NetworkServerStatus
 import com.alhussain.retrofit.model.NetworkSyncedDevice
 import com.alhussain.retrofit.model.NetworkTemplates
+import com.alhussain.retrofit.model.OrdersRequest
 import com.alhussain.retrofit.model.ResultWrapper
 
 interface AxiomNetworkDataSource {
@@ -24,4 +26,5 @@ interface AxiomNetworkDataSource {
     suspend fun order(request: NetworkOrder.NetworkOrderRequest): ResultWrapper<NetworkOrder>
     suspend fun fulfilledOrder(reqId: String): ResultWrapper<NetworkFulfilledOrder>
     suspend fun confirmOrder(request: ConfirmOrderRequest): ResultWrapper<NetworkResponse<Unit>>
+    suspend fun getOrders(request: OrdersRequest): ResultWrapper<NetworkOrders>
 }

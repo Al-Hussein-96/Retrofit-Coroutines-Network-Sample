@@ -6,10 +6,12 @@ import com.alhussain.retrofit.model.NetworkCatalogs
 import com.alhussain.retrofit.model.NetworkCustomer
 import com.alhussain.retrofit.model.NetworkFulfilledOrder
 import com.alhussain.retrofit.model.NetworkOrder
+import com.alhussain.retrofit.model.NetworkOrders
 import com.alhussain.retrofit.model.NetworkResponse
 import com.alhussain.retrofit.model.NetworkServerStatus
 import com.alhussain.retrofit.model.NetworkSyncedDevice
 import com.alhussain.retrofit.model.NetworkTemplates
+import com.alhussain.retrofit.model.OrdersRequest
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -54,6 +56,14 @@ internal interface RetrofitAxiomNetworkApi {
 
     @POST(value = "order/confirm")
     suspend fun confirmOrder(@Body request: ConfirmOrderRequest): NetworkResponse<Unit>
+
+
+    @POST(value = "order/dev/list")
+    suspend fun getOrders(@Body request: OrdersRequest): NetworkOrders
+
+
+//    @POST(value = "order/ding/account")
+//    suspend fun dingLookup(@Body request: OrdersRequest): NetworkResponse<Unit>
 
 
 }

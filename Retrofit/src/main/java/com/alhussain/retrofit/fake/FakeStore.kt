@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.alhussain.retrofit.model.ConfirmOrderRequest
 import com.alhussain.retrofit.model.NetworkAppUpdate
 import com.alhussain.retrofit.model.NetworkOrder
+import com.alhussain.retrofit.model.OrdersRequest
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -21,12 +22,12 @@ class FakeStore @Inject constructor(@ApplicationContext context: Context) {
     }
 
     fun getAuthToken(): String {
-        return "123" + mSharedPref.getString(AppConstants.AUTH_TOKEN, "").orEmpty()
+        return  mSharedPref.getString(AppConstants.AUTH_TOKEN, "").orEmpty()
     }
 
-    fun getUsername(): String = mSharedPref.getString(AppConstants.USERNAME, "525251").orEmpty()
+    fun getUsername(): String = mSharedPref.getString(AppConstants.USERNAME, "19962024").orEmpty()
 
-    fun getPassword(): String = mSharedPref.getString(AppConstants.PASSWORD, "km59kjvg").orEmpty()
+    fun getPassword(): String = mSharedPref.getString(AppConstants.PASSWORD, "lqw2ws7l").orEmpty()
 
     companion object {
         fun getAppUpdateRequest(): NetworkAppUpdate.NetworkAppUpdateRequest =
@@ -52,6 +53,15 @@ class FakeStore @Inject constructor(@ApplicationContext context: Context) {
             type = "PIN",
             pinSerial = "2653140380",
             status = "printed"
+        )
+
+        fun getOrdersRequest(): OrdersRequest = OrdersRequest(
+            deviceid = "785507",
+            type = "ALL",
+            offset = 0,
+            limit = 20,
+            fromdate = "2024-01-21 16:24:00 PM",
+            todate = "2024-01-26 16:24:00 PM"
         )
     }
 }
