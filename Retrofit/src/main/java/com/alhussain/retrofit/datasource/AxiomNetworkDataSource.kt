@@ -1,11 +1,13 @@
 package com.alhussain.retrofit.datasource
 
+import com.alhussain.retrofit.model.ClaimRequest
 import com.alhussain.retrofit.model.ConfirmOrderRequest
 import com.alhussain.retrofit.model.DingOrderRequest
 import com.alhussain.retrofit.model.EmposOrderRequest
 import com.alhussain.retrofit.model.FulfilledDingOrderRequest
 import com.alhussain.retrofit.model.NetworkAppUpdate
 import com.alhussain.retrofit.model.NetworkCatalogs
+import com.alhussain.retrofit.model.NetworkClaim
 import com.alhussain.retrofit.model.NetworkCustomer
 import com.alhussain.retrofit.model.NetworkDingResult
 import com.alhussain.retrofit.model.NetworkFulfilledDingOrder
@@ -35,5 +37,6 @@ interface AxiomNetworkDataSource {
     suspend fun dingLookup(request: DingOrderRequest): ResultWrapper<NetworkDingResult>
     suspend fun fulfilledDingOrder(request: FulfilledDingOrderRequest): ResultWrapper<NetworkFulfilledDingOrder>
     suspend fun fulfilledEmposOrder(request: EmposOrderRequest): ResultWrapper<NetworkFulfilledDingOrder>
+    suspend fun requestClaim(request: ClaimRequest): ResultWrapper<NetworkClaim>
 
 }

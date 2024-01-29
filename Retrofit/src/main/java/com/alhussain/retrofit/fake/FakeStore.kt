@@ -2,6 +2,7 @@ package com.alhussain.retrofit.fake
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.alhussain.retrofit.model.ClaimRequest
 import com.alhussain.retrofit.model.ConfirmOrderRequest
 import com.alhussain.retrofit.model.DingOrderRequest
 import com.alhussain.retrofit.model.EmposOrderRequest
@@ -102,6 +103,14 @@ class FakeStore @Inject constructor(@ApplicationContext context: Context) {
                 amount = 25.0,
                 subtype = ""
             )
+        )
+
+        fun getRequestClaim(): ClaimRequest = ClaimRequest(
+            type = "PIN",
+            pinSerial = "2307562208",
+            data = "No paper",
+            orderRef = 15084,
+            source = "POS",
         )
     }
 }
