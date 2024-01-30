@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class NetworkOrder(
-    val stauts: String,
+    val status: String,
     val desc: String,
     @SerialName("reqid") val reqId: String
 ) {

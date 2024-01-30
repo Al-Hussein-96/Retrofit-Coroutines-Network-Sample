@@ -31,7 +31,14 @@ class FakeStore @Inject constructor(@ApplicationContext context: Context) {
         return mSharedPref.getString(AppConstants.AUTH_TOKEN, "").orEmpty()
     }
 
+    fun setUsername(username: String) {
+        mSharedPref.edit().putString(AppConstants.USERNAME, username).apply()
+    }
+
     fun getUsername(): String = mSharedPref.getString(AppConstants.USERNAME, "19962024").orEmpty()
+    fun setPassword(password: String) {
+        mSharedPref.edit().putString(AppConstants.PASSWORD, password).apply()
+    }
 
     fun getPassword(): String = mSharedPref.getString(AppConstants.PASSWORD, "lqw2ws7l").orEmpty()
 
@@ -73,7 +80,7 @@ class FakeStore @Inject constructor(@ApplicationContext context: Context) {
         fun getDingLookupRequest(): DingOrderRequest = DingOrderRequest(
             type = "DING",
             accountRequest = DingOrderRequest.AccountRequest(
-                number = "910000000000"
+                number = "920000000000"
             )
         )
 
@@ -84,10 +91,20 @@ class FakeStore @Inject constructor(@ApplicationContext context: Context) {
             type = "DING",
             origin = "POS",
             customerId = "19962024",
-            items = listOf(INetworkOrderRequest.ItemRequest(productId = 1, qty = 1, amount = 1.98)),
-            accountRequest = DingOrderRequest.AccountRequest(
-                number = "920000000000",
-                benefits = "Mobile"
+            items = listOf(
+                INetworkOrderRequest.ItemRequest(
+                    productId = 15,
+                    qty = 1,
+                    amount = 1.98
+                )
+            ),
+            dingRequest = FulfilledDingOrderRequest.DingRequest(
+                accountNumber = "910000000000",
+                distributorRef = "Mobile",
+                sendCurrencyIso = "AED",
+                skuCode = "PK_MB_TopUp_100.00",
+                sendValue = 1.98,
+                providerCode = "MBPK", validateOnly = "true"
             )
         )
 

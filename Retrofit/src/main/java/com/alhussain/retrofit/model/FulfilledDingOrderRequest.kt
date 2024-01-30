@@ -11,8 +11,19 @@ data class FulfilledDingOrderRequest(
     override val type: String,
     override val origin: String,
     override val items: List<INetworkOrderRequest.ItemRequest>,
-    val accountRequest: DingOrderRequest.AccountRequest
-) : INetworkOrderRequest
+    val dingRequest: DingRequest
+) : INetworkOrderRequest {
+    @Serializable
+    data class DingRequest(
+        val accountNumber: String,
+        val distributorRef: String,
+        val providerCode: String,
+        val sendCurrencyIso: String,
+        val sendValue: Double,
+        val skuCode: String,
+        val validateOnly: String,
+    )
+}
 
 
 

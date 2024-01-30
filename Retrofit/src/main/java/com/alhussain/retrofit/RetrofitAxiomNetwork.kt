@@ -3,6 +3,7 @@ package com.alhussain.retrofit
 import com.alhussain.retrofit.apis.RetrofitAxiomNetworkApi
 import com.alhussain.retrofit.datasource.AxiomNetworkDataSource
 import com.alhussain.retrofit.di.OtherOkHttpClient
+import com.alhussain.retrofit.interceptors.apiCallWithRetry
 import com.alhussain.retrofit.interceptors.safeApiCall
 import com.alhussain.retrofit.model.ClaimRequest
 import com.alhussain.retrofit.model.ClaimsRequest
@@ -28,10 +29,12 @@ import com.alhussain.retrofit.model.OrdersRequest
 import com.alhussain.retrofit.model.ResultWrapper
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.serialization.json.Json
 import okhttp3.Call
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
+import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -93,8 +96,10 @@ internal class RetrofitAxiomNetwork @Inject constructor(
     }
 
     override suspend fun fulfilledOrder(reqId: String): ResultWrapper<NetworkFulfilledOrder> {
-        return safeApiCall(dispatcher = Dispatchers.IO) {
-            networkApi.fulfilledOrder(reqId = reqId)
+        return apiCallWithRetry<NetworkFulfilledOrder> {
+            safeApiCall(dispatcher = Dispatchers.IO) {
+                networkApi.fulfilledOrder(reqId = reqId)
+            }
         }
     }
 
@@ -146,4 +151,22 @@ internal class RetrofitAxiomNetwork @Inject constructor(
         }
     }
 
+}
+
+suspend fun <T> retrySuccessResponse(
+    times: Int = Int.MAX_VALUE,
+    delay: Long = 100, // 0.1 second
+    block: suspend () -> T
+): T {
+    repeat(times - 1) {
+        try {
+            val result = block()
+
+        } catch (e: IOException) {
+            // you can log an error here and/or make a more finer-grained
+            // analysis of the cause to see if retry is needed
+        }
+        delay(delay)
+    }
+    return block() // last attempt
 }
