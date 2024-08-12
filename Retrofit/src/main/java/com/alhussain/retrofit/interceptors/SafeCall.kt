@@ -1,6 +1,5 @@
 package com.alhussain.retrofit.interceptors
 
-import com.alhussain.retrofit.model.ServerError
 import com.alhussain.retrofit.model.ResultWrapper
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -21,8 +20,7 @@ suspend fun <T> safeApiCall(
                 is IOException -> ResultWrapper.NetworkError
                 is HttpException -> {
                     val code = throwable.code()
-                    val errorResponse = convertErrorBody(throwable)
-                    ResultWrapper.GenericError(code, errorResponse)
+                    ResultWrapper.GenericError(code, throwable)
                 }
 
                 else -> {
@@ -33,11 +31,3 @@ suspend fun <T> safeApiCall(
     }
 }
 
-
-private fun convertErrorBody(throwable: HttpException): ServerError? {
-    return try {
-        Json.decodeFromString<ServerError>(throwable.response()?.errorBody()?.string().toString().orEmpty())
-    } catch (exception: Exception) {
-        null
-    }
-}

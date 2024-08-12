@@ -4,12 +4,6 @@ plugins {
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
-    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
-
-}
-
-secrets {
-    defaultPropertiesFileName = "secrets.defaults.properties"
 
 }
 

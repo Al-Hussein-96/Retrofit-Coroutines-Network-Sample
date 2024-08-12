@@ -1,9 +1,7 @@
 package com.alhussain.retrofit.di
 
-import com.alhussain.retrofit.AuthNetwork
-import com.alhussain.retrofit.RetrofitAxiomNetwork
-import com.alhussain.retrofit.datasource.AuthDataSource
-import com.alhussain.retrofit.datasource.AxiomNetworkDataSource
+import com.alhussain.retrofit.RetrofitNetwork
+import com.alhussain.retrofit.datasource.NetworkDataSource
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,9 +13,7 @@ import dagger.hilt.components.SingletonComponent
 internal interface ApiModule {
 
     @Binds
-    fun bindAxiomNetwrokDataSource(impl: RetrofitAxiomNetwork): AxiomNetworkDataSource
+    fun bindNetwrokDataSource(impl: RetrofitNetwork): NetworkDataSource
 
 
-    @Binds
-    fun bindAuthNetwrokDataSource(impl: AuthNetwork): AuthDataSource
 }
